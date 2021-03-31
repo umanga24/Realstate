@@ -1,0 +1,39 @@
+{% extends 'includes/base.html'%}
+{% block content %}
+ <div class = "col-sm-6 offset-3">
+<table class="table">
+    <thead>
+    <th>SN</th>
+    <th>Category</th>
+
+
+    </thead>
+
+
+    <tbody>
+    {% for category in categories %}
+    <tr>
+         <td>{{ category.id }}</td>
+        <td>{{ category.name }}</td>
+        <td>
+         <a href="{% url 'cj:edit_category' pk=category.pk %}">
+             <button class="btn btn-warning">Edit</button>
+         </a>
+
+        </td>
+        <td>
+            <a href="{% url 'cj:delete_category' pk=category.pk %}">
+                <button class="btn btn-danger">Delete</button>
+            </a>
+        </td>
+
+
+
+    </tr>
+    {% endfor %}
+    </tbody>
+
+
+</table>
+ </div>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'includes/base.html' %}
+
+{% block content %}
+<h1>This is list product</h1>
+
+<table class="table">
+    <thead>
+    <th>SN</th>
+    <th>Name</th>
+    <th>Category</th>
+    <th>image</th>
+    <th>location</th>
+    <th>Description</th>
+    <th>Price</th>
+
+    </thead>
+
+
+    <tbody>
+    {% for product in products %}
+    <tr>
+         <td>{{ product.id }}</td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.category }}</td>
+         <td>
+                        {% if product.image %}
+                            <img src="{{ product.image.url }}" alt = "Image not found" height="30px">
+                        {% else %}
+                            No Photo Avaliable
+                        {% endif %}
+         </td>
+        <td>{{ product.location }}</td>
+         <td>{{ product.Description }}</td>
+        <td>{{ product.price }}</td>
+                <td>
+         <a href="{% url 'cj:edit_product' pk=product.pk %}">
+             <button class="btn btn-warning">Edit</button>
+         </a>
+
+        </td>
+        <td>
+            <a href="{% url 'cj:delete_product' pk=product.pk %}">
+                <button class="btn btn-danger">Delete</button>
+            </a>
+        </td>
+
+        <td>
+        <a href="{% url 'cj:details_product' pk=product.pk %}">
+            <button class="btn btn-primary">Details</button>
+
+        </a>
+        </td>
+
+
+    </tr>
+    {% endfor %}
+    </tbody>
+
+
+</table>
+ </div>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'includes/base.html' %}
+{% block content %}
+
+<div>
+
+         <td>
+                        {% if product.image %}
+                            <img src="{{ product.image.url }}" alt = "Image not found" width="500" height="300px">
+                        {% else %}
+                            No Photo Avaliable
+                        {% endif %}
+         </td>
+</div>
+
+<div>
+
+    <td>{{ product.location }}</td>
+         <td>{{ product.Description }}</td>
+
+         <td>{{ product.price }}</td>
+</div>
+
+{% endblock%}

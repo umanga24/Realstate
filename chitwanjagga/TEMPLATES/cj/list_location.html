@@ -1,0 +1,45 @@
+{% extends 'includes/base.html' %}
+{% block content %}
+<h1> this is my list of location</h1>
+
+
+ <div class = "col-sm-6 offset-3">
+<table class="table">
+    <thead>
+    <th>SN</th>
+    <th>Location</th>
+
+
+    </thead>
+
+
+    <tbody>
+    {% for location in locations %}
+    <tr>
+         <td>{{ location.id }}</td>
+                <td>{{ location.location }}</td>
+        <td>
+         <a href="{% url 'cj:edit_location' pk=location.pk %}">
+             <button class="btn btn-warning">Edit</button>
+         </a>
+
+        </td>
+        <td>
+            <a href="{% url 'cj:delete_location' pk=location.pk %}">
+                <button class="btn btn-danger">Delete</button>
+            </a>
+        </td>
+
+
+
+
+
+
+    </tr>
+    {% endfor %}
+    </tbody>
+
+
+</table>
+ </div>
+{% endblock %}
