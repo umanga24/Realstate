@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django import views
@@ -104,15 +104,26 @@ class ProductDeleteView(DeleteView):
     context_object_name = 'product'
 
 
-class loginUserView(views.View):
+class LoginUserView(views.View):
     def get(self, request):
         loginform = LoginForm()
         return render(request, 'cj/login.html',{'loginform': loginform})
 
     def post(self, request):
-        username =request.POST.get('user')
+        username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(username = username, password = password )
-        if User is None:
+        if user is None:
             return redirect('cj:login_user')
+        else:
+            if user.is_active:
+                login(request, user=user)
+                return redirect('cj:list_product')
+            else:
+                return redirect('cj:login_user')
+
+class LogOutUserView(views.View):
+    def get(self, request):
+        logout(request)
+        return redirect('home')
 

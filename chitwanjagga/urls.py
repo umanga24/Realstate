@@ -25,5 +25,8 @@ urlpatterns = [
     path('delete_product/<int:pk>', views.ProductDeleteView.as_view(), name='delete_product'),
     path('details_product/<int:pk>', views.ProductDetailsView.as_view(), name='details_product'),
 
+    path('login/', views.LoginUserView.as_view(), name = 'login'),
+    path('logout/', views.LogOutUserView.as_view(), name = 'logout'),
+
 
 ]
