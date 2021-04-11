@@ -1,5 +1,5 @@
 {% extends 'includes/base.html' %}
-
+{% load crispy_form_tags %}
 {% block content %}
 
     <div class = "col-sm-6 offset-3">
@@ -7,7 +7,7 @@
         <h1>This is add category</h1>
         <form action="#" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-            {{form}}
+            {{form|crispy}}
             <button type="submit" class = 'btn btn-success'>New Category</button>
         </form>
 

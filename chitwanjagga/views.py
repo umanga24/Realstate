@@ -2,6 +2,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django import views
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DeleteView, DetailView, UpdateView
@@ -20,13 +21,15 @@ class CategoryListView(ListView):
     template_name = 'cj/list_category.html'
     context_object_name = 'categories'
 
-class CategoryAddView(CreateView):
+class CategoryAddView(LoginRequiredMixin, CreateView):
+    login_url =reverse_lazy('cj:login')
     model = Category
     template_name = 'cj/add_category.html'
     fields = '__all__'
     success_url = reverse_lazy('cj:list_category')
 
-class CategoryEditView(UpdateView):
+class CategoryEditView(LoginRequiredMixin,UpdateView):
+    login_url = reverse_lazy('cj:login')
     model = Category
     fields ='__all__'
     template_name = 'cj/edit_category.html'
@@ -37,7 +40,8 @@ class CategoryDetailsView(DetailView):
     template_name = 'cj/details_category.html'
     context_object_name =  'category'
 
-class CategoryDeleteView(DeleteView):
+class CategoryDeleteView(LoginRequiredMixin, DeleteView):
+    login_url = reverse_lazy('cj:login')
     model = Category
     template_name = 'cj/delete_category.html'
     fields = '__all__'
@@ -49,24 +53,28 @@ class locationListView(ListView):
     template_name = 'cj/list_location.html'
     context_object_name = 'locations'
 
-class locationAddView(CreateView):
+class locationAddView(LoginRequiredMixin, CreateView):
+    login_url = reverse_lazy('cj:login')
     model = Location
     template_name = 'cj/add_location.html'
     fields = '__all__'
     success_url = reverse_lazy('cj:list_location')
 
-class locationEditView(UpdateView):
+class locationEditView(LoginRequiredMixin, UpdateView):
+    login_url = reverse_lazy('cj:login')
     model = Location
     template_name = 'cj/edit_location.html'
     fields = '__all__'
     success_url = reverse_lazy('cj:list_location')
 
-class locationDetailsView(DetailView):
+class locationDetailsView(LoginRequiredMixin, DetailView):
+    login_url = reverse_lazy('cj:login')
     model = Location
     template_name = 'cj/detail_location.html'
     context_object_name = 'location'
 
-class locationDeleteView(DeleteView):
+class locationDeleteView(LoginRequiredMixin, DeleteView):
+    login_url = reverse_lazy('cj:login')
     model = Location
     template_name = 'cj/delete_location.html'
     fields  = '__all__'
@@ -79,13 +87,15 @@ class ProductListView(ListView):
     template_name = 'cj/list_product.html'
     context_object_name = 'products'
 
-class ProductAddView(CreateView):
+class ProductAddView(LoginRequiredMixin, CreateView):
+    login_url = reverse_lazy('cj:login')
     model = Product
     template_name = 'cj/add_product.html'
     fields = '__all__'
     success_url = reverse_lazy('cj:list_product')
 
-class ProductEditView(UpdateView):
+class ProductEditView(LoginRequiredMixin, UpdateView):
+    login_url = reverse_lazy('cj:login')
     model = Product
     template_name = 'cj/edit_product.html'
     fields = '__all__'
@@ -96,7 +106,8 @@ class ProductDetailsView(DetailView):
     template_name = 'cj/details_product.html'
     context_object_name = 'product'
 
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(LoginRequiredMixin, DeleteView):
+    login_url = reverse_lazy('cj:login')
     model = Product
     template_name = 'cj/delete_product.html'
     fields = '__all__'

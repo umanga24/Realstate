@@ -19,14 +19,18 @@
          <td>{{ location.id }}</td>
                 <td>{{ location.location }}</td>
         <td>
+            {% if user.is_authenticated %}
          <a href="{% url 'cj:edit_location' pk=location.pk %}">
              <button class="btn btn-warning">Edit</button>
+             {% endif %}
          </a>
 
         </td>
         <td>
+            {% if user.is_authenticated %}
             <a href="{% url 'cj:delete_location' pk=location.pk %}">
                 <button class="btn btn-danger">Delete</button>
+                {% endif %}
             </a>
         </td>
 
