@@ -1,15 +1,18 @@
 {% extends 'includes/base.html' %}
-{% load crispy_form_tags %}
+{% load crispy_forms_tags %}
+
 {% block content %}
-<h1>This is add product</h1>
 
 
-        <form action="#" method="POST" enctype="multipart/form-data">
+  <div class="col-sm-6 offset-3">
+      <h1>Add Ghar/Jagga</h1>
+
+    <form action='#' method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-            {{form}}
-            <button type="submit" class = 'btn btn-success'>New Category</button>
-        </form>
 
+        {{form|crispy}}
+        <button type="submit" class = "btn btn-success">Submit</button>
+    </form>
     </div>
 
 

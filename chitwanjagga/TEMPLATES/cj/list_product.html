@@ -1,67 +1,47 @@
 {% extends 'includes/base.html' %}
 
 {% block content %}
-<h1>This is list product</h1>
 
-<table class="table">
-    <thead>
-    <th>SN</th>
-    <th>Name</th>
-    <th>Category</th>
-    <th>image</th>
-    <th>location</th>
-    <th>Description</th>
-    <th>Price</th>
-
-    </thead>
-
-
-    <tbody>
+{% if user.is_authenticated %}
+<a class="btn btn-primary" href="{% url 'cj:add_product' %}">Add New </a>
+{% endif %}
+<div class="row">
     {% for product in products %}
-    <tr>
-         <td>{{ product.id }}</td>
-        <td>{{ product.name }}</td>
-        <td>{{ product.category }}</td>
-         <td>
+
+    <div class ="col-log-3">
+
                         {% if product.image %}
-                            <img src="{{ product.image.url }}" alt = "Image not found" height="30px">
+                            <img src="{{ product.image.url }}" alt = "Image not found" height="100px">
                         {% else %}
                             No Photo Avaliable
                         {% endif %}
-         </td>
-        <td>{{ product.location }}</td>
-         <td>{{ product.Description }}</td>
-        <td>{{ product.price }}</td>
-                <td>
-                    {% if user.is_authenticated %}
+        <div class ="box-element name">
+            <h6><strong>{{ product.name }}</strong></h6>
+            <hr>
+
+            <h6>{{ product.location }}</h6>
+            <h6>Rs:{{ product.price }}</h6>
+            {% if user.is_authenticated %}
          <a href="{% url 'cj:edit_product' pk=product.pk %}">
              <button class="btn btn-warning">Edit</button>
          </a>
-                    {% endif %}
+            {% endif %}
 
-        </td>
-        <td>
             {% if user.is_authenticated %}
             <a href="{% url 'cj:delete_product' pk=product.pk %}">
                 <button class="btn btn-danger">Delete</button>
             </a>
             {% endif %}
-        </td>
 
-        <td>
         <a href="{% url 'cj:details_product' pk=product.pk %}">
-            <button class="btn btn-primary">Details</button>
+            <button class="btn btn-primary">view more</button>
 
         </a>
-        </td>
+        </div>
+    </div>
 
-
-    </tr>
     {% endfor %}
-    </tbody>
+</div>
 
-
-</table>
- </div>
 
 {% endblock %}
